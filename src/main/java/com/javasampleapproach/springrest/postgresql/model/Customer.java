@@ -24,13 +24,17 @@ public class Customer {
 	@Column(name = "active")
 	private boolean active;
 
+	@Column(name = "email")
+	private String email ;
+
 	public Customer() {
 	}
 
-	public Customer(String name, int age) {
+	public Customer(String name, int age,String email ) {
 		this.name = name;
 		this.age = age;
 		this.active = false;
+		this.email = email;
 	}
 
 	public long getId() {
@@ -61,8 +65,16 @@ public class Customer {
 		this.active = active;
 	}
 
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", name=" + name + ", age=" + age + ", active=" + active + "]";
+		return "Customer [id=" + id + ", name=" + name + ", age=" + age + ", active=" + active + ", email="+ email +" ]";
 	}
 }
