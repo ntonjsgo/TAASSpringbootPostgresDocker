@@ -27,15 +27,16 @@ public class Customer {
 	@Column(name = "email")
 	private String email ;
 
-	public Customer() {
-	}
-
 	public Customer(String name, int age,String email ) {
 		this.name = name;
 		this.age = age;
 		this.active = false;
 		this.email = email;
 	}
+
+	public Customer() {
+	}
+
 
 	public long getId() {
 		return id;
@@ -72,6 +73,8 @@ public class Customer {
 	public String getEmail() {
 		return this.email;
 	}
+
+
 
 	@Override
 	public String toString() {

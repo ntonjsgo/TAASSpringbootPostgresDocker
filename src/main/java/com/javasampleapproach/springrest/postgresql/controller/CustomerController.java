@@ -41,7 +41,7 @@ public class CustomerController {
 	@PostMapping(value = "/customers/create")
 	public Customer postCustomer(@RequestBody Customer customer) {
 
-		Customer _customer = repository.save(new Customer(customer.getName(), customer.getAge()));
+		Customer _customer = repository.save(new Customer(customer.getName(), customer.getAge(), customer.getEmail()));
 		return _customer;
 	}
 
