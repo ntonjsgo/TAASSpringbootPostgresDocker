@@ -14,13 +14,11 @@ import javax.persistence.*;
 @Table(name = "post")
 public class Post {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.MERGE)
     //@JsonManagedReference
     @JoinColumn(name = "customer_id", nullable = false,
             referencedColumnName = "id")
@@ -32,9 +30,16 @@ public class Post {
     @Column(name = "body")
     private String body;
 
+    // @Column(name = "customer_id")
+    // private long customer_id;
+
     public long getId() {
         return id;
     }
+
+    // public long getCustomerId() {
+    //     return customer_id;
+    // }
 
     public void setId(long id) {
         this.id = id;
@@ -64,10 +69,14 @@ public class Post {
         this.body = body;
     }
 
-    public Post(String title, String body, Customer customer){
+    public Post() {}
+
+    public Post(String title, String body, Customer customer) {
         this.title = title;
         this.body = body;
         this.customer = customer;
     }
 
+
 }
+

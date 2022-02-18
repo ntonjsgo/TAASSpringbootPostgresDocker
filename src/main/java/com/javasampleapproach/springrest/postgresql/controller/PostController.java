@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.javasampleapproach.springrest.postgresql.model.Post;
+import com.javasampleapproach.springrest.postgresql.model.*;
+import com.javasampleapproach.springrest.postgresql.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.javasampleapproach.springrest.postgresql.model.Customer;
-import com.javasampleapproach.springrest.postgresql.repo.CustomerRepository;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -27,7 +26,10 @@ import com.javasampleapproach.springrest.postgresql.repo.CustomerRepository;
 public class PostController {
 
     @Autowired
-    CustomerRepository repository;
+    PostRepository repository;
+
+    @Autowired
+    CustomerRepository customer_repository;
 
     @GetMapping("/posts")
     public List<Post> getAllPosts() {
@@ -40,52 +42,11 @@ public class PostController {
         return posts;
     }
 
-    @PostMapping(value = "/customers/create")
-    public Customer postCustomer(@RequestBody Customer customer) {
-
-        Customer _customer = repository.save(new Customer(customer.getName(), customer.getAge(), customer.getEmail()));
-        return _customer;
-    }
-
-    @DeleteMapping("/customers/{id}")
-    public ResponseEntity<String> deleteCustomer(@PathVariable("id") long id) {
-        System.out.println("Delete Customer with ID = " + id + "...");
-
-        repository.deleteById(id);
-
-        return new ResponseEntity<>("Customer has been deleted!", HttpStatus.OK);
-    }
-
-    @DeleteMapping("/customers/delete")
-    public ResponseEntity<String> deleteAllCustomers() {
-        System.out.println("Delete All Customers...");
-
-        repository.deleteAll();
-
-        return new ResponseEntity<>("All customers have been deleted!", HttpStatus.OK);
-    }
-
-    @GetMapping(value = "customers/age/{age}")
-    public List<Customer> findByAge(@PathVariable int age) {
-
-        List<Customer> customers = repository.findByAge(age);
-        return customers;
-    }
-
-    @PutMapping("/customers/{id}")
-    public ResponseEntity<Customer> updateCustomer(@PathVariable("id") long id, @RequestBody Customer customer) {
-        System.out.println("Update Customer with ID = " + id + "...");
-
-        Optional<Customer> customerData = repository.findById(id);
-
-        if (customerData.isPresent()) {
-            Customer _customer = customerData.get();
-            _customer.setName(customer.getName());
-            _customer.setAge(customer.getAge());
-            _customer.setActive(customer.isActive());
-            return new ResponseEntity<>(repository.save(_customer), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
+    @PostMapping("/posts")
+	public Post createPost(@RequestBody CreatePostRequest postRequest) {
+        System.out.println("Create Post...");
+        Customer _cust = customer_repository.findById(postRequest.customer_id).get();
+		Post _post = repository.save(new Post(postRequest.title, postRequest.body, _cust));
+		return _post;
+	}
 }

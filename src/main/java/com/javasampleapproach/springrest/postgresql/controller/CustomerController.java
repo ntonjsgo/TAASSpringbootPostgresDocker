@@ -70,6 +70,13 @@ public class CustomerController {
 		return customers;
 	}
 
+	@GetMapping(value = "customers/{id}")
+	public Customer findById(@PathVariable Long id) {
+
+		Customer customer = repository.findById(id).get();
+		return customer;
+	}
+
 	@PutMapping("/customers/{id}")
 	public ResponseEntity<Customer> updateCustomer(@PathVariable("id") long id, @RequestBody Customer customer) {
 		System.out.println("Update Customer with ID = " + id + "...");
