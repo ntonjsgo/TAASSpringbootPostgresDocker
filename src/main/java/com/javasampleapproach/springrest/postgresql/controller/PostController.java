@@ -49,4 +49,20 @@ public class PostController {
 		Post _post = repository.save(new Post(postRequest.title, postRequest.body, _cust));
 		return _post;
 	}
+
+    @PutMapping("/posts/{id}")
+	public ResponseEntity<Post> updatePost(@PathVariable("id") long id, @RequestBody Post post) {
+		System.out.println("Update Post with ID = " + id + "...");
+
+		Optional<Post> postData = repository.findById(id);
+
+		if (postData.isPresent()) {
+			Post _post = postData.get();
+			_post.setTitle(post.getTitle());
+			_post.setBody(post.getBody());
+			return new ResponseEntity<>(repository.save(_post), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
 }
