@@ -1,3 +1,4 @@
+C:\Users\fgreco\Desktop\TAASSpringbootPostgresDocker\src\main\java\com\javasampleapproach\springrest\postgresql\controller\CommentController.java
 C:\Users\fgreco\Desktop\TAASSpringbootPostgresDocker\src\main\java\com\javasampleapproach\springrest\postgresql\model\CreatePostRequest.java
 C:\Users\fgreco\Desktop\TAASSpringbootPostgresDocker\src\main\java\com\javasampleapproach\springrest\postgresql\controller\PostController.java
 C:\Users\fgreco\Desktop\TAASSpringbootPostgresDocker\src\main\java\com\javasampleapproach\springrest\postgresql\controller\CustomerController.java
@@ -5,4 +6,7 @@ C:\Users\fgreco\Desktop\TAASSpringbootPostgresDocker\src\main\java\com\javasampl
 C:\Users\fgreco\Desktop\TAASSpringbootPostgresDocker\src\main\java\com\javasampleapproach\springrest\postgresql\repo\PostRepository.java
 C:\Users\fgreco\Desktop\TAASSpringbootPostgresDocker\src\main\java\com\javasampleapproach\springrest\postgresql\repo\CustomerRepository.java
 C:\Users\fgreco\Desktop\TAASSpringbootPostgresDocker\src\main\java\com\javasampleapproach\springrest\postgresql\model\Post.java
+C:\Users\fgreco\Desktop\TAASSpringbootPostgresDocker\src\main\java\com\javasampleapproach\springrest\postgresql\repo\CommentRepository.java
 C:\Users\fgreco\Desktop\TAASSpringbootPostgresDocker\src\main\java\com\javasampleapproach\springrest\postgresql\SpringRestPostgreSqlApplication.java
+C:\Users\fgreco\Desktop\TAASSpringbootPostgresDocker\src\main\java\com\javasampleapproach\springrest\postgresql\model\CreateCommentRequest.java
+C:\Users\fgreco\Desktop\TAASSpringbootPostgresDocker\src\main\java\com\javasampleapproach\springrest\postgresql\model\Comment.java

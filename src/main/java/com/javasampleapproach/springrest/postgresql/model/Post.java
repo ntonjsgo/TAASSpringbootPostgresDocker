@@ -1,13 +1,15 @@
 package com.javasampleapproach.springrest.postgresql.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -24,22 +26,24 @@ public class Post {
             referencedColumnName = "id")
     private Customer customer;
 
+    @OneToMany(cascade=CascadeType.MERGE)
+    //@JsonManagedReference
+    @JoinColumn(name = "comments_list", nullable = false)
+    private List<Comment> comments_list;
+
     @Column(name = "title")
     private String title;
 
     @Column(name = "body")
     private String body;
 
-    // @Column(name = "customer_id")
-    // private long customer_id;
-
     public long getId() {
         return id;
     }
 
-    // public long getCustomerId() {
-    //     return customer_id;
-    // }
+    public List<Comment> getCommentsList() {
+        return comments_list;
+    }
 
     public void setId(long id) {
         this.id = id;
@@ -74,12 +78,14 @@ public class Post {
     public Post(String title, String body) {
         this.title = title;
         this.body = body;
+        this.comments_list = new ArrayList<Comment>();
     }
 
     public Post(String title, String body, Customer customer) {
         this.title = title;
         this.body = body;
         this.customer = customer;
+        this.comments_list = new ArrayList<Comment>();
     }
 
 

@@ -22,7 +22,7 @@ import com.javasampleapproach.springrest.postgresql.repo.CustomerRepository;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api")
 public class CustomerController {
 
 	@Autowired
@@ -38,11 +38,14 @@ public class CustomerController {
 		return customers;
 	}
 
-	@PostMapping(value = "/customers/create")
-	public Customer postCustomer(@RequestBody Customer customer) {
 
-		Customer _customer = repository.save(new Customer(customer.getName(), customer.getAge(), customer.getEmail()));
-		return _customer;
+	@PostMapping(value = "/customers/create")
+	public ResponseEntity<Customer> postCustomer(@RequestBody Customer customer) {
+		List<Customer> custList = findByName(customer.getName());
+		if(custList.size() > 0) {
+			return new ResponseEntity<>(HttpStatus.CONFLICT);
+		}
+		return new ResponseEntity<>(repository.save(new Customer(customer.getName(), customer.getEmail())), HttpStatus.CREATED);
 	}
 
 	@DeleteMapping("/customers/{id}")
@@ -63,10 +66,9 @@ public class CustomerController {
 		return new ResponseEntity<>("All customers have been deleted!", HttpStatus.OK);
 	}
 
-	@GetMapping(value = "customers/age/{age}")
-	public List<Customer> findByAge(@PathVariable int age) {
-
-		List<Customer> customers = repository.findByAge(age);
+	@GetMapping(value = "customers/name/{name}")
+	public List<Customer> findByName(@PathVariable String name) {
+		List<Customer> customers = repository.findByName(name);
 		return customers;
 	}
 
@@ -86,8 +88,6 @@ public class CustomerController {
 		if (customerData.isPresent()) {
 			Customer _customer = customerData.get();
 			_customer.setName(customer.getName());
-			_customer.setAge(customer.getAge());
-			_customer.setActive(customer.isActive());
 			return new ResponseEntity<>(repository.save(_customer), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

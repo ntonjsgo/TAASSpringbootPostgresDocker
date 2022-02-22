@@ -42,6 +42,13 @@ public class PostController {
         return posts;
     }
 
+	@GetMapping(value = "posts/{id}")
+	public Post findById(@PathVariable Long id) {
+
+		Post post = repository.findById(id).get();
+		return post;
+	}
+
     @PostMapping("/posts")
 	public Post createPost(@RequestBody CreatePostRequest postRequest) {
         System.out.println("Create Post...");
