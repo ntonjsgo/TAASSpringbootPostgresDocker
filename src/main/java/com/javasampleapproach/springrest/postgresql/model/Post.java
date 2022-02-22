@@ -7,9 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.*;
 
 @Entity
@@ -26,11 +23,6 @@ public class Post {
             referencedColumnName = "id")
     private Customer customer;
 
-    @OneToMany(cascade=CascadeType.MERGE)
-    //@JsonManagedReference
-    @JoinColumn(name = "comments_list", nullable = false)
-    private List<Comment> comments_list;
-
     @Column(name = "title")
     private String title;
 
@@ -39,10 +31,6 @@ public class Post {
 
     public long getId() {
         return id;
-    }
-
-    public List<Comment> getCommentsList() {
-        return comments_list;
     }
 
     public void setId(long id) {
@@ -78,14 +66,12 @@ public class Post {
     public Post(String title, String body) {
         this.title = title;
         this.body = body;
-        this.comments_list = new ArrayList<Comment>();
     }
 
     public Post(String title, String body, Customer customer) {
         this.title = title;
         this.body = body;
         this.customer = customer;
-        this.comments_list = new ArrayList<Comment>();
     }
 
 
