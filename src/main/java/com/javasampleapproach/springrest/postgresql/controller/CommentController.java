@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api")
 public class CommentController {
@@ -43,7 +43,7 @@ public class CommentController {
     }
 
     @GetMapping(value = "/comments/ofPost/{post_id}")
-	public List<Comment> findByPostID(@PathVariable Long post_id) {
+	public List<Comment> findCommentsByPostID(@PathVariable Long post_id) {
 		List<Comment> comments_list = repository.findByPostId(post_id);
 		return comments_list;
 	}

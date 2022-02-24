@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api")
 public class PostController {
@@ -47,6 +47,13 @@ public class PostController {
 
 		Post post = repository.findById(id).get();
 		return post;
+	}
+
+	@GetMapping(value = "posts/ofCustomer/{customer_id}")
+	public List<Post> findPostsByCustomerId(@PathVariable Long customer_id) {
+
+		List<Post> posts = repository.findByCustomerId(customer_id);
+		return posts;
 	}
 
     @PostMapping("/posts")
