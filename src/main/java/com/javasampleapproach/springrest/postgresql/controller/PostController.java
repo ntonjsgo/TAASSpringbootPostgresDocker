@@ -37,7 +37,7 @@ public class PostController {
         System.out.println("Get all Posts...");
 
         List<Post> posts = new ArrayList<>();
-        repository.findAll().forEach(posts::add);
+        repository.findByOrderById().forEach(posts::add);
 
         return posts;
     }

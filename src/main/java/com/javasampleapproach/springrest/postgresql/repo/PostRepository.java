@@ -7,4 +7,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface PostRepository extends CrudRepository<Post, Long> {
     List<Post> findByCustomerId(Long customer_id);
+    List<Post> findByOrderById();
 }
