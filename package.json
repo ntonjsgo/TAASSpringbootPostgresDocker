@@ -1,0 +1,20 @@
+{
+  "name": "taasspringbootpostgresdocker",
+  "version": "1.0.0",
+  "description": "modify application.properties with correct login and PWD for Postgres",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "restart": "mvnw -DskipTests=true clean package && docker-compose build && docker-compose up"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ntonjsgo/TAASSpringbootPostgresDocker.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ntonjsgo/TAASSpringbootPostgresDocker/issues"
+  },
+  "homepage": "https://github.com/ntonjsgo/TAASSpringbootPostgresDocker#readme"
+}
